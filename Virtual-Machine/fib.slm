@@ -1,0 +1,28 @@
+new num
+new a
+new b
+cin num
+addnu num num -1
+set a 0
+set b 1
+ifnu num 1 jump
+cout a
+exit
+jump
+ifnu num 2 jump
+cout b
+exit
+jump
+new i
+set i 1
+new c
+while
+ifnot num i jump
+add c a b
+setto a b
+setto b c
+addnu i i 1
+move while
+jump
+cout b
+exit

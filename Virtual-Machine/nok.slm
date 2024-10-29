@@ -1,0 +1,17 @@
+new a
+new b
+new c
+new proizv
+cin a
+cin b
+mul proizv a b
+while
+ifnotnu b 0 jump
+ost c a b
+setto a b
+setto b c
+move while
+jump
+del a proizv a
+cout a
+exit
