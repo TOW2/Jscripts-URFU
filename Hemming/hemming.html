@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>my hemming code</title>
+    <script>
+        function checkFirstInput(inputText){
+            if (inputText.length > 4)
+            return false;
+            for (let i in inputText){
+                if (inputText[i]!='1' && inputText[i]!='0')
+                return false;
+            }
+            return true;
+        }
+        function code(){
+            let inpText = document.getElementById('inpMessege').value;
+            if (checkFirstInput(inpText)==false){
+                document.getElementById('outMessege').value = "Error input";
+                document.getElementById('ph').innerText = "Error input";
+            }
+            else {
+                document.getElementById('ph').innerText = "First input is correct";
+                inpText = inpText.split('');
+                for (let i = 0; i < inpText.length; i++){
+                    inpText[i] = inpText[i]*1;
+                }
+                let controlBit1 = (inpText[0] + inpText[2] + inpText[3]) % 2;
+                let controlBit2 = (inpText[0] + inpText[1] + inpText[3]) % 2;
+                let controlBit3 = (inpText[1] + inpText[2] + inpText[3]) % 2;
+                inpText.push(controlBit1, controlBit2, controlBit3);
+                let string='';
+                for (let i = 0; i < inpText.length; i++){
+                    string += inpText[i]+'';
+                }
+                document.getElementById('outMessege').value = string;
+                value = string;
+            }
+        }
+        function check(){
+            let inpText = document.getElementById('outMessege').value;
+            inpText = inpText.split('');
+            for (let i = 0; i < inpText.length; i++){
+                inpText[i] = inpText[i]*1;
+            }
+            let cB1 = (inpText[0] + inpText[2] + inpText[3]) % 2;
+            let cB2 = (inpText[0] + inpText[1] + inpText[3]) % 2;
+            let cB3 = (inpText[1] + inpText[2] + inpText[3]) % 2;
+            if (cB1!=inpText[4] && cB2!=inpText[5] && cB3!=inpText[6]){
+                inpText[3]=(inpText[3]+1) %2;
+                inpText[3]+='';
+                document.getElementById('pv').innerText = "4th bit was incorrect";
+            }
+            else if (cB1!=inpText[4] && cB2!=inpText[5]) {
+                inpText[0]=(inpText[0]+1) %2;
+                inpText[0]+='';
+                document.getElementById('pv').innerText = "1st bit was incorrect";
+            }
+            else if(cB2!=inpText[5] && cB3!=inpText[6]){
+                inpText[1]=(inpText[1]+1) %2;
+                inpText[1]+='';
+                document.getElementById('pv').innerText = "2nd bit was incorrect";
+            }
+            else if (cB1!=inpText[4] && cB3!=inpText[6]){
+                inpText[2]=(inpText[2]+1) %2;
+                inpText[2]+='';
+                document.getElementById('pv').innerText = "3rd bit was incorrect";
+            }
+            else if (cB1!=inpText[4]){
+                inpText[4]=cB1;
+                document.getElementById('pv').innerText = "5th bit was incorrect";
+            }
+            else if (cB2!=inpText[5]){
+                inpText[5]=cB2;
+                document.getElementById('pv').innerText = "6th bit was incorrect";
+            }
+            else if (cB3!=inpText[6]){
+                inpText[6]=cB3;
+                document.getElementById('pv').innerText = "7th bit was incorrect";
+            }
+            else document.getElementById('pv').innerText = "All bits are correct";
+            let string = '';
+            for (let i in inpText ){
+                string+=inpText[i];
+            }
+            document.getElementById('correctDecode').value = string;
+            value = string;
+        }
+    </script>
+</head>
+<body>
+    <h1>Artemiy P.</h1>
+    <p><input type="text" id="inpMessege"/>Input message (1 or 0 only), 4 bits</p>
+    <p id = 'ph'> </p>
+    <p><input type="button" value="sus" onclick="code()"/></p>
+    <p><input type="text" id="outMessege" />Coded message</p>
+    <p><input type="button" value="check" onclick="check()"/></p>
+    <p><input type="text" id="correctDecode"/>Original message</p>
+    <p id = 'pv'> </p>
+</body>
+</html>
